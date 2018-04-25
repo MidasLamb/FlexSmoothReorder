@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+            flex: 0 1 auto;
+            width: 100%;
+            justify-content: space-around;
+        }
+
+        .col {
+            width: 200px;
+        }
+
+        #first {
+            background-color: rgb(219, 219, 255);
+        }
+        #second {
+            background-color: rgb(95, 95, 255);
+        }
+        #third {
+            background-color: blue;
+        }
+
+        .order-1 {
+            order: 1;
+        }
+        .order-2{
+            order: 2;
+        }
+        .order-3{
+            order: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container smooth-reorder" id="container">
+        <div class="col" id="third">
+            Third
+        </div>
+        <div class="col" id="first">
+            First
+        </div>
+        <div class="col" id="second">
+            Second
+        </div>
+    </div>
+    <button onclick="changeOrder()">Change order</button>
+    <script>
+
+        var orders = ["order-1", "order-2", "order-3"];
+        function changeOrder(){
+            const ids = ["first", "second", "third"];
+            ids.forEach((id) => {
+                document.getElementById(id).classList.remove("order-1");
+                document.getElementById(id).classList.remove("order-2");
+                document.getElementById(id).classList.remove("order-3");
+            });
+            document.getElementById("first").classList.add(orders[0]);
+            document.getElementById("second").classList.add(orders[1]);
+            document.getElementById("third").classList.add(orders[2]);
+
+            orders = shuffle(orders);
+            
+        }
+
+        /**
+         * Shuffles array in place. ES6 version
+         * @param {Array} a items An array containing the items.
+         */
+        function shuffle(a) {
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+    </script>
+    <script src="flex-smooth-reorder.js"></script>
+</body>
+</html>
